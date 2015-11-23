@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <assert.h>
 
 typedef struct{
 	char *studium;
@@ -22,7 +23,7 @@ typedef struct{
 	adress *adress;
 }student;
 
-stat make_stat(char *studium, int semester){
+stat* make_stat(char *studium, int semester){
 	stat *st = malloc(sizeof(stat));
 	assert(st != NULL);
 	st->studium = studium;
@@ -30,15 +31,15 @@ stat make_stat(char *studium, int semester){
 	return st;
 }
 
-adress make_adress(char *street, char *land){
-	adresse *adr = malloc(sizeof(adress));
+adress* make_adress(char *street, char *land){
+	adress *adr = malloc(sizeof(adress));
 	assert(adr != NULL);
 	adr->street = street;
 	adr->land = land;
 	return adr;
 }
 
-student make_student(char *name, char *studium, int semester, char *street, char *land){
+student* make_student(char *name, char *studium, int semester, char *street, char *land){
 	student *stud = malloc(sizeof(student));
 	assert(stud != NULL);
 	stud->name = name;
@@ -48,6 +49,7 @@ student make_student(char *name, char *studium, int semester, char *street, char
 }
 
 void freefn(void *element){
+	assert(element != NULL);
 	student *stud;
 	stud = element;
 	free(stud->name);
@@ -72,13 +74,13 @@ int main(int argc, char *argv[]){
 
 	GenStackPush(&studentStack, anton);
 	GenStackPush(&studentStack, lincoln);
-	GenStackPush(&student Stack, lena);
+	GenStackPush(&studentStack, lena);
 	GenStackPush(&studentStack, lin);
-	GenStackPush(studentStack, karkov);
+//	GenStackPush(&studentStack, karkov);
 	printf("Pushed 5 Elements on the Stack\n");
 
 	printf("This 5 Elements: \n");
-	student *tmp = malloc(sizeof(student));
+	student *tmp = (student *)malloc(sizeof(student));
 
 	while(!GenStackEmpty(&studentStack)){
 		GenStackPop(&studentStack, tmp);
@@ -94,13 +96,13 @@ int main(int argc, char *argv[]){
 
 	GenStackPush(&studentStack, anton);
 	GenStackPush(&studentStack, lincoln);
-	GenStackPush(&student Stack, lena);
+	GenStackPush(&studentStack, lena);
 	GenStackPush(&studentStack, lin);
-	GenStackPush(studentStack, karkov);
+	GenStackPush(&studentStack, karkov);
 	printf("Pushed 3 Objects on the Stack!\n");
 
 
-	printf("Popped two Objects from the Stack!\n")
+	printf("Popped two Objects from the Stack!\n");
 	GenStackPop(&studentStack, tmp);
 	printf("Student: %s\n Wohnhaft in: %s, %s\n Studiert: %s im %d Semester.\n",
 			tmp->name, tmp->adress->street, tmp->adress->land, tmp->stat->studium, tmp->stat->semester);
