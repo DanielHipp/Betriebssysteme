@@ -20,7 +20,7 @@ GenStackNew (genStack * s, int elemSize, void(*freefn)(void *))
 	s->logLength = 0;
 	s->allocLength = GenStackInitialAllocationSize;
 	s->elemSize = elemSize;
-	s->elems = (char *) malloc (s->allocLength * s->elemSize);
+	s->elems = (size_t*) malloc (s->allocLength * s->elemSize);
 	assert(s->elems != NULL);
 
 
@@ -37,7 +37,7 @@ GenStackDispose (genStack * s)
 		while(!GenStackEmpty){
 			s->logLength--;
 			void* source;
-			source = (char *) s->elems + (s->logLength * s->elemSize);
+			source = (size_t *) s->elems + (s->logLength * s->elemSize);
 			s->freefn(source);
 		}
 	}
@@ -67,14 +67,14 @@ GenStackPush (genStack * s, const void* elemAddr)
 		if (newStack != NULL)
 		{
 			s->allocLength = s->allocLength * DoubleStack;
-			destination = (char*) s->elems + (s->logLength * s->elemSize);
+			destination = (size_t*) s->elems + (s->logLength * s->elemSize);
 			memcpy (destination, elemAddr, s->elemSize);
 			s->logLength++;
 		}
 	}
 	else
 	{
-		destination = (char*) s->elems + (s->logLength * s->elemSize);
+		destination = (size_t*) s->elems + (s->logLength * s->elemSize);
 		memcpy (destination, elemAddr, s->elemSize);
 		s->logLength++;
 	}
@@ -93,7 +93,7 @@ GenStackPop (genStack * s,void * elemAddr)
 	assert (s->elems != NULL);
 	s->logLength--;
 	void *start;
-	start  = (char*) s->elems + (s->logLength * s->elemSize);
+	start  = (size_t*) s->elems + (s->logLength * s->elemSize);
 
 	memcpy(elemAddr, start, s->elemSize);
 
