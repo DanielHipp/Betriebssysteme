@@ -66,7 +66,7 @@ int main(int argc, char *argv[]){
 	student *lincoln = make_student("Lincoln", "WIN", 5, "Freeroad 5", "USA");
 	student *lena = make_student("Lena", "GIB", 3, "St. Anna - Road 4a", "England");
 	student *lin = make_student("Lin", "KD", 4, "S334, Shanghai", "China");
-	student *karkov = make_student("karkov", "AR", 6, "nazvaniya ulits", "Russland");
+	student *karkov = make_student("Karkov", "AR", 6, "nazvaniya ulits", "Russland");
 
 	genStack studentStack;
 	GenStackNew(&studentStack, sizeof(student), freefn);
@@ -76,7 +76,7 @@ int main(int argc, char *argv[]){
 	GenStackPush(&studentStack, lincoln);
 	GenStackPush(&studentStack, lena);
 	GenStackPush(&studentStack, lin);
-//	GenStackPush(&studentStack, karkov);
+	GenStackPush(&studentStack, karkov);
 	printf("Pushed 5 Elements on the Stack\n");
 
 	printf("This 5 Elements: \n");
@@ -84,12 +84,12 @@ int main(int argc, char *argv[]){
 
 	while(!GenStackEmpty(&studentStack)){
 		GenStackPop(&studentStack, tmp);
-		printf("Student: %s\n Wohnhaft in: %s, %s\n Studiert: %s im %d Semester.\n",
+		printf("Student: %s\nWohnhaft in: %s, %s\nStudiert: %s im %d Semester.\n",
 				tmp->name, tmp->adress->street, tmp->adress->land, tmp->stat->studium, tmp->stat->semester);
 	}
 
 	GenStackDispose(&studentStack);
-	printf("Stack disposed!");
+	printf("Stack disposed!\n");
 
 	GenStackNew(&studentStack, sizeof(student), freefn);
 	printf("Created Second Studentstack\n");
@@ -101,22 +101,9 @@ int main(int argc, char *argv[]){
 	GenStackPush(&studentStack, karkov);
 	printf("Pushed 3 Objects on the Stack!\n");
 
-
-	printf("Popped two Objects from the Stack!\n");
-	GenStackPop(&studentStack, tmp);
-	printf("Student: %s\n Wohnhaft in: %s, %s\n Studiert: %s im %d Semester.\n",
-			tmp->name, tmp->adress->street, tmp->adress->land, tmp->stat->studium, tmp->stat->semester);
-	GenStackPop(&studentStack, tmp);
-	printf("Student: %s\n Wohnhaft in: %s, %s\n Studiert: %s im %d Semester.\n",
-			tmp->name, tmp->adress->street, tmp->adress->land, tmp->stat->studium, tmp->stat->semester);
-
-
 	GenStackDispose(&studentStack);
 	printf("Stack disposed!\n");
 
-	//Because of memcpy i need to freefn the popped Objects
-	freefn(karkov);
-	freefn(lin);
 
 	free(tmp);
 	free(anton);
@@ -127,5 +114,3 @@ int main(int argc, char *argv[]){
 
 	return 0;
 }
-
-

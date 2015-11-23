@@ -71,20 +71,8 @@ int main(int argc, char * argv[]){
 	GenStackPush(&musicStack, onSun);
 	printf("Pushed 5 Objects on the Musicstack\n");
 
-	printf("Popped two Objects from the Stack!\n");
-	GenStackPop(&musicStack, tmp);
-	printf("Musicname: %s, Length in Seconds: %d, Artistname: %s\n",
-			tmp->musicname, tmp->secondsToHear, tmp->artist);
-	GenStackPop(&musicStack, tmp);
-	printf("Musicname: %s, Length in Seconds: %d, Artistname: %s\n",
-			tmp->musicname, tmp->secondsToHear, tmp->artist);
-
 	GenStackDispose(&musicStack);
 	printf("Second Musicstack disposed!\n");
-
-	//Because of memcopy the popped Objects need to delete the pointers with freefn
-	freefn(onSun);
-	freefn(strength);
 
 	free(tmp);
 	free(whereAll);
