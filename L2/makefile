@@ -10,8 +10,8 @@ LIBC = genstacklib.c
 TESTC = $(shell ls gentest*.c)
 OBJ = ${LIBC:.c=.o}
 LIB = genstacklib
-EXE = $(patsubst %.c,%, (TESTC))
-.PHONY: clean all gentests
+EXE = $(patsubst %.c,%, $(TESTC))
+.PHONY: clean all gentests 
 
 all: $(LIB) $(EXE)
 gentests: $(EXE)

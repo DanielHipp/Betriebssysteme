@@ -4,34 +4,41 @@
 #include <stdlib.h>
 
 
-int main(){
+int
+main ()
+{
 	int input;
-	pid_t pid = fork();
+	pid_t pid = fork ();
 
-	if(pid == (-1)){
-		perror("fork failed!");
+	if (pid == (-1))
+	{
+		perror ("fork failed!");
 		return -1;
 
-	} else if(pid == 0){
-		/*Child*/
-		printf("Created Childprocess\n");
-		printf("Child in Zombiemode\n");
-		exit(0);
+	}
+	else if (pid == 0)
+	{
+		/*Child */
+		printf ("Created Childprocess\n");
+		printf ("Child in Zombiemode\n");
+		exit (0);
 
-	} else if(pid > 0){
-		/*Parent*/
-		system("ps");
+	}
+	else if (pid > 0)
+	{
+		/*Parent */
+		system ("ps");
 
-		fflush(stdin);
+		fflush (stdin);
 
-		printf("Press a number to end\n");
-		while(!scanf("%d", &input)){
+		printf ("Press a number to end\n");
+		while (!scanf ("%d", &input))
+		{
 			clearerr (stdin);
-            while (getc (stdin) != '\n');
+			while (getc (stdin) != '\n');
 		}
 
 	}
 
 	return 0;
 }
-
