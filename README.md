@@ -1,7 +1,7 @@
 # Betriebssysteme
 ---
 
-This programms were maked for Betriebssysteme together with my Partner.
+This programms were done for Betriebssysteme together with my Partner.
 
 My Partner programmed all Python - related Programms (.py, .pyx, .sh) of the first three tasks.
 I programmed all C - related Programms (.c, .h) for the first three Tasks and the Design of the second and third Task.
